@@ -45,7 +45,7 @@ docker run -it -w /opt/ -v $(pwd):/opt/ --rm alexsuch/asciidoctor asciidoctor-ep
 In all cases, result will be stored in `output` dir:
 
 [source,console]
-----
+****
 $ tree
 .
 ├── README.adoc
@@ -62,4 +62,4 @@ $ tree
     ├── book.html
     ├── book.mobi
     └── book.pdf
-----
+****
