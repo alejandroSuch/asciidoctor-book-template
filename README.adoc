@@ -40,12 +40,12 @@ Build *Kindle* version:
 [source,console]
 ----
 docker run -it -w /opt/ -v $(pwd):/opt/ --rm alexsuch/asciidoctor asciidoctor-epub3 -a ebook-format=kf8 -D output book.adoc
----
+----
 
 In all cases, result will be stored in `output` dir:
 
 [source,console]
-====
+----
 $ tree
 .
 ├── README.adoc
@@ -62,4 +62,4 @@ $ tree
     ├── book.html
     ├── book.mobi
     └── book.pdf
-====
+----
