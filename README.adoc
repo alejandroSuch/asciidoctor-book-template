@@ -8,71 +8,58 @@ Download this repo:
 
 [source,console]
 ----
-$ git clone https://github.com/chloerei/asciidoctor-book-template.git bookname
+$ git clone https://github.com/alejandroSuch/asciidoctor-book-template.git bookname
 $ cd bookname
 ----
 
-Install gems:
+Build *HTML* version:
 
 [source,console]
 ----
-$ bundle install
+docker run -it -w /opt/ -v $(pwd):/opt/ --rm alexsuch/asciidoctor asciidoctor -D output book.adoc
 ----
 
-Download fonts for PDF generate (run once):
+
+Build *PDF* version:
 
 [source,console]
 ----
-$ asciidoctor-pdf-cjk-kai_gen_gothic-install
+docker run -it -w /opt/ -v $(pwd):/opt/ --rm alexsuch/asciidoctor asciidoctor-pdf -D output book.adoc
 ----
 
-Build books:
+
+Build *EPUB* version:
 
 [source,console]
 ----
-$ rake build
+docker run -it -w /opt/ -v $(pwd):/opt/ --rm alexsuch/asciidoctor asciidoctor-epub3 -D output book.adoc
 ----
 
-Result will be store in `build` dir:
+Build *Kindle* version:
 
 [source,console]
 ----
-$ tree build
-build/
-|-- book
-|   |-- book-0.1.0
-|   |   |-- images
-|   |   |   |-- cover.png
-|   |   |   `-- cover.svg
-|   |   `-- index.html
-|   |-- book-0.1.0.epub
-|   |-- book-0.1.0-kf8.epub
-|   |-- book-0.1.0.mobi
-|   |-- book-0.1.0.pdf
-|   `-- book-0.1.0.pdfmarks
-`-- book-sample
-    |-- book-sample-0.1.0
-    |   |-- images
-    |   |   |-- cover.png
-    |   |   `-- cover.svg
-    |   `-- index.html
-    |-- book-sample-0.1.0.epub
-    |-- book-sample-0.1.0-kf8.epub
-    |-- book-sample-0.1.0.mobi
-    |-- book-sample-0.1.0.pdf
-    `-- book-sample-0.1.0.pdfmarks
+docker run -it -w /opt/ -v $(pwd):/opt/ --rm alexsuch/asciidoctor asciidoctor-epub3 -a ebook-format=kf8 -D output book.adoc
+---
+
+In all cases, result will be stored in `output` dir:
+
+[source,console]
 ----
-
-=== Customize
-
-==== Filename
-
-By default, there are two build source: `book.adoc` and `boo-sample.adoc`. It is suitable for separate formal and sample version. When source filename is `book.adoc`, build task will generate ebooks in `build/book` directory.
-
-You can change filename, add or remove source, then change `SOURCES` in Rakefile to change build source.
-
-.Rakefile
-[source,ruby]
-----
-SOURCES = %w(book.adoc book-sample.adoc)
+$ tree
+.
+├── README.adoc
+├── book-sample.adoc
+├── book.adoc
+├── chapters
+│   └── cjk.adoc
+├── images
+│   ├── cover.png
+│   └── cover.svg
+└── output
+    ├── book-kf8.epub
+    ├── book.epub
+    ├── book.html
+    ├── book.mobi
+    └── book.pdf
 ----
